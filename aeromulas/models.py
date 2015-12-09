@@ -76,6 +76,6 @@ class Store(Base):
         heapq.heappush(self.timed_posts, post)
 
     def add_comment(self, post_id, comment):
-        post = self.posts[uid]
-        post.comment.append(comment)
+        post = self.posts[post_id]
+        post.comments.append(comment)
 
