@@ -2,6 +2,7 @@ import json
 import asyncio
 import datetime
 import calendar
+import sys 
 from asyncio import coroutine
 from aiohttp import web
 
@@ -74,6 +75,8 @@ def init(loop):
     app.router.add_route('GET', '/api/post/{uid}', get_post_by_id)
     app.router.add_route('POST', '/api/post/{uid}/comments', post_comment)
     app.router.add_route('POST', '/api/post', create_post)
+    if 'test' in sys.argv:
+        app.router.add_static('/', './dist')
     srv = yield from loop.create_server(app.make_handler(), '0.0.0.0', 8000)
     return srv
 
@@ -81,4 +84,8 @@ def init(loop):
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
     loop.run_until_complete(init(loop))
+    if 'test' in sys.argv:
+        import subprocess
+        subprocess.call(['webpack'])
+        print('webpack generation finished')
     loop.run_forever()
