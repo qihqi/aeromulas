@@ -3,16 +3,16 @@ import React from 'react';
 
 var ContentList = React.createClass({
     render: function() {
-        return <div>
+        return <div className="container">
             {this.props.threads.map((i) => 
-                <p><a href="{i.link}">{i.title}</a></p>)}
+                <div className="row" key={i.link}><a href="{i.link}">{i.title}</a></div>)}
         </div>
     }
 });
 
 var test_list = [
     {link: 'hello', title: 'aeraddas'} ,
-    {link: 'hello', title: 'aeraddas'} 
+    {link: 'hello2', title: 'aeraddas'} 
     ];
 
 export default React.createClass({
