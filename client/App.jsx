@@ -16,7 +16,19 @@ var test_list = [
     ];
 
 export default React.createClass({
+    getInitialState: function() {
+        this.getCurrentThreads();
+        return {'items': []};
+    },
+    getCurrentThreads: function() {
+        $.ajax({
+            url: '/api/post',
+            success: function(result) {
+                this.setState({'items': result});
+            }.bind(this)
+        });
+    },
     render: function() { 
-        return <ContentList threads={test_list} />;
+        return <ContentList threads={this.state.items} />;
     }
 });

@@ -71,7 +71,7 @@ def create_post(request):
 @coroutine
 def init(loop):
     app = web.Application(loop=loop)
-    app.router.add_route('GET', '/api/post/', get_posts)
+    app.router.add_route('GET', '/api/post', get_posts)
     app.router.add_route('GET', '/api/post/{uid}', get_post_by_id)
     app.router.add_route('POST', '/api/post/{uid}/comments', post_comment)
     app.router.add_route('POST', '/api/post', create_post)
@@ -86,6 +86,6 @@ if __name__ == '__main__':
     loop.run_until_complete(init(loop))
     if 'test' in sys.argv:
         import subprocess
-        subprocess.call(['webpack'])
+        subprocess.call(['webpack', '-p'])
         print('webpack generation finished')
     loop.run_forever()
